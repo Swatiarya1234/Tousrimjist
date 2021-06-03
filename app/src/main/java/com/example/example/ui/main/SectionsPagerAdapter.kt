@@ -24,6 +24,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
     lateinit var fragment: Fragment
     override fun getItem(position: Int): Fragment {
+
         when (position){
             1 -> fragment = Guests()
             2 -> fragment = Hotels()

@@ -10,5 +10,4 @@ class mvvmcloud : ViewModel() {
     var phonenumber:String ? =""
     lateinit var ViewModel:ViewModel
 
-    
 }

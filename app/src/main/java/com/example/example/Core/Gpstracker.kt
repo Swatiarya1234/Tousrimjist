@@ -9,7 +9,7 @@ import android.util.Log
 import java.io.IOException
 import java.util.*
 
-class LocationListner(val context:Context) : LocationListener {
+class Gpstracker(val context:Context) : LocationListener {
     lateinit var Location:String
     lateinit var Latitude:String
 

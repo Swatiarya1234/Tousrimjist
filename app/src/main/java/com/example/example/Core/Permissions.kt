@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 
 
 class Permissions(val context: Context) : ActivityCompat(),ActivityCompat.OnRequestPermissionsResultCallback {
@@ -28,7 +27,7 @@ class Permissions(val context: Context) : ActivityCompat(),ActivityCompat.OnRequ
             }
         }
     }
-    fun askpermission(permission: String, requestcode: Int, permission1: String) {
+    fun askPermission(requestcode: Int, permission1: String) {
         if (checkSelfPermission(
                 context,
                 permission

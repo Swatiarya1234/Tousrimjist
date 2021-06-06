@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 
 
-class Permissions(val context: Context) : ActivityCompat(),ActivityCompat.OnRequestPermissionsResultCallback {
+class Permissions(val context: Activity) : ActivityCompat(),ActivityCompat.OnRequestPermissionsResultCallback {
 
      val LOCATION_REQUEST_CODE = 1
     private lateinit var locationManager: LocationManager
@@ -27,16 +27,16 @@ class Permissions(val context: Context) : ActivityCompat(),ActivityCompat.OnRequ
             }
         }
     }
-    fun askPermission(requestcode: Int, permission1: String) {
+    fun askPermission(requestcode: Int, permission:String) {
         if (checkSelfPermission(
                 context,
                 permission
             ) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(
                 context,
-                permission1
+                permission
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            requestPermissions((context as Activity), arrayOf(permission, permission1), requestcode)
+            requestPermissions((context as Activity), arrayOf(permission), requestcode)
         } else {
             Toast.makeText(context, "Permission already granted", Toast.LENGTH_LONG).show()
         }

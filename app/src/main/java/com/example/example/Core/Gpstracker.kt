@@ -10,14 +10,11 @@ import java.io.IOException
 import java.util.*
 
 class Gpstracker(val context:Context) : LocationListener {
-
     private lateinit var Location:String
   private lateinit var Latitude:String
 
   override fun onLocationChanged(location: Location) {
-       Location = location.longitude.toString()
-       Latitude = location.latitude.toString()
-        getLocationfused(location.latitude,location.longitude)
+        getLocationfused(location.getLatitude(),location.getLongitude())
   }
     private fun getLocationfused(latitude: Double, longitude: Double): String {
         val result = java.lang.StringBuilder()
@@ -38,6 +35,5 @@ class Gpstracker(val context:Context) : LocationListener {
         return result.toString()
 
     }
-
 
 }

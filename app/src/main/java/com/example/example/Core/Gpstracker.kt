@@ -11,7 +11,7 @@ import java.util.*
 
 class Gpstracker(val context:Context) : LocationListener {
     private lateinit var Location:String
-  private lateinit var Latitude:String
+    private lateinit var Latitude:String
 
   override fun onLocationChanged(location: Location) {
         getLocationfused(location.getLatitude(),location.getLongitude())
@@ -23,8 +23,9 @@ class Gpstracker(val context:Context) : LocationListener {
             val addresses: List<Address> = geocoder.getFromLocation(latitude, longitude, 1)
             if (addresses.size > 0 && addresses != null)  {
                 val address: Address = addresses[0]
-                result.append(address.getLocality()).append("\n")
-                result.append(address.getCountryName())
+                result.append(address.locality).append("\n")
+                result.append(address.longitude).append("\n")
+               // result.append(address.getAddressLine().append("\n"))
                 Log.d("append",address.locality.toString())
                 Log.d("append",address.countryName.toString())
             }

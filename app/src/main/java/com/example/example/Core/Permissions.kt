@@ -6,11 +6,12 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 
 class Permissions(val context: Activity) : ActivityCompat(),ActivityCompat.OnRequestPermissionsResultCallback {
 
-     val LOCATION_REQUEST_CODE = 1
+    val LOCATION_REQUEST_CODE = 1
     private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 2
 
@@ -20,14 +21,15 @@ class Permissions(val context: Activity) : ActivityCompat(),ActivityCompat.OnReq
         grantResults: IntArray
     ) {
         when (requestCode) {
-            LOCATION_REQUEST_CODE -> if (grantResults.size> 0 && grantResults[0] === PackageManager.PERMISSION_GRANTED) {
+            LOCATION_REQUEST_CODE -> if (grantResults.size > 0 && grantResults[0] === PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(context, " Location Permission granted", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(context, " Location Permission denied", Toast.LENGTH_LONG).show()
             }
         }
     }
-    fun askPermission(requestcode: Int, permission:String) {
+
+    fun askPermission(requestcode: Int, permission: String) {
         if (checkSelfPermission(
                 context,
                 permission
@@ -41,6 +43,7 @@ class Permissions(val context: Activity) : ActivityCompat(),ActivityCompat.OnReq
             Toast.makeText(context, "Permission already granted", Toast.LENGTH_LONG).show()
         }
     }
+
 //    fun GpsPermisions(){
 //        locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager
 //        /* enable the gps permissions */

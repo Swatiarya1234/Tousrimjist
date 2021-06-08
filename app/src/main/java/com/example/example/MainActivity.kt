@@ -6,23 +6,27 @@ import android.view.View
 import android.widget.TextView
 import android.Manifest;
 import android.app.Activity
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.example.Core.Gpstracker
 import com.example.example.Core.Permissions
 import com.google.android.material.tabs.TabLayout
+import java.io.IOException
 import java.util.*
 
 
 
- class MainActivity : AppCompatActivity(),View.OnClickListener
- {
+ class MainActivity : AppCompatActivity(),View.OnClickListener{
      private lateinit var TabLayout:TabLayout
 
 //     protected lateinit var textView:TextView
 //     protected lateinit var  values:TextView
      protected lateinit var Permission:Permissions
      protected var  REQUEST_CODE = 1
+     protected lateinit var String:String
      protected lateinit var locationListener:Gpstracker
+
+
 
 
      override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +38,8 @@ import java.util.*
 //         values = findViewById(R.id.longitude)
          Permission = Permissions(this)
          Permission.askPermission(REQUEST_CODE, Manifest.permission.ACCESS_COARSE_LOCATION);
-          locationListener = Gpstracker(getApplicationContext())
+         locationListener = Gpstracker(applicationContext)
+
 
      }
      override fun onClick(v: View?) {

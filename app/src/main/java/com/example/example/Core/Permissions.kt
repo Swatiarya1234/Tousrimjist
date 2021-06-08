@@ -28,8 +28,12 @@ class Permissions(val context: Activity) : ActivityCompat(),ActivityCompat.OnReq
             }
         }
     }
+<<<<<<< HEAD
 
     fun askPermission(requestcode: Int, permission: String) {
+=======
+    fun askPermission(requestcode: Int, permission:String) {
+>>>>>>> 6eda7e3ca47deaffcef413a27da1c9ea4d8180ac
         if (checkSelfPermission(
                 context,
                 permission

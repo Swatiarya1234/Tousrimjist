@@ -38,7 +38,7 @@ import java.util.*
 //         values = findViewById(R.id.longitude)
          Permission = Permissions(this)
          Permission.askPermission(REQUEST_CODE, Manifest.permission.ACCESS_COARSE_LOCATION);
-         locationListener = Gpstracker(applicationContext)
+          locationListener = Gpstracker(getApplicationContext())
 
 
      }

@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 
 class RestClient {
 
-    private val API:String = "9ddde7bb16caabbd0f16d18d619f1bee"
+    public val API:String = "9ddde7bb16caabbd0f16d18d619f1bee"
     var Data: RestClient? = null
 
     lateinit var Api: RestClasses
@@ -26,10 +26,24 @@ class RestClient {
         .client(getHeader())
 
     //create retrofit Instance
-    private val retrofit = builder.build()
+    private var retrofit = builder.build()
 
     //we will use this class to create an anonymous inner class function that
     //implements Country service Interface
+
+    fun getClient(): Retrofit? {
+        if (retrofit == null) {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+            retrofit = Retrofit.Builder()
+                .baseUrl(API)
+                .client(getHeader())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        }
+        return retrofit
+    }
+
 
 
     fun <T> buildService (serviceType :Class<T>):T{

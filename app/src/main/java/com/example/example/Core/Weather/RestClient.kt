@@ -1,36 +1,43 @@
 package com.example.example.Core.Weather
 import android.util.Log
+import com.example.example.Core.Weather.Pojoclasses.RestClasses
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import com.example.example.Core.Weather.Api
 
 
 class RestClient {
 
     private val API:String = "9ddde7bb16caabbd0f16d18d619f1bee"
     var Data: RestClient? = null
-    lateinit var Api: Api
+
+    lateinit var Api: RestClasses
+
+    val URL ="http://api.openweathermap.org/data/2.5/"
+    //CREATE HTTP CLIENT
+    private val okHttp =OkHttpClient.Builder()
+
+    //retrofit builder
+    private val builder =Retrofit.Builder().baseUrl(URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(getHeader())
+
+    //create retrofit Instance
+    private val retrofit = builder.build()
+
+    //we will use this class to create an anonymous inner class function that
+    //implements Country service Interface
 
 
-    fun getInstance(): RestClient? {
-        if (Data == null) {
-            Data = RestClient()
-        }
-        return Data
+    fun <T> buildService (serviceType :Class<T>):T{
+        return retrofit.create(serviceType)
     }
-    init{
-        val retrofit: Retrofit = retrofit2.Retrofit.Builder()
-            .baseUrl(com.example.example.Core.Weather.Api.Url)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(getHeader())
-         //   .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-       Api  = retrofit.create(Api::class.java)
-    }
+
+
+
 
     private fun getHeader(): OkHttpClient {
 
@@ -58,5 +65,6 @@ class RestClient {
             }
             .build()
     }
+
 
 }

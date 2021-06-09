@@ -1,19 +1,24 @@
  package com.example.example
 
+import android.Manifest
+import android.R.attr.country
+import android.R.attr.description
 import android.location.*
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import android.Manifest;
-import android.app.Activity
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import com.example.example.Core.Gpstracker
 import com.example.example.Core.Permissions
+import com.example.example.Core.Weather.Pojoclasses.RestClasses
+import com.example.example.Core.Weather.Pojoclasses.Weather
+import com.example.example.Core.Weather.Pojoclasses.WeatherPujomain
+import com.example.example.Core.Weather.RestClient
 import com.google.android.material.tabs.TabLayout
-import java.io.IOException
-import java.util.*
-
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
  class MainActivity : AppCompatActivity(),View.OnClickListener{
@@ -25,7 +30,8 @@ import java.util.*
      protected var  REQUEST_CODE = 1
      protected lateinit var String:String
      protected lateinit var locationListener:Gpstracker
-
+     protected lateinit var Api : RestClasses
+     protected lateinit var RestClient:RestClient
 
 
 
@@ -39,7 +45,7 @@ import java.util.*
          Permission = Permissions(this)
          Permission.askPermission(REQUEST_CODE, Manifest.permission.ACCESS_COARSE_LOCATION);
           locationListener = Gpstracker(getApplicationContext())
-
+         reposnegenerated()
 
      }
      override fun onClick(v: View?) {
@@ -47,4 +53,12 @@ import java.util.*
 
         }
     }
+     fun reposnegenerated() {
+         val latt = 40.7539
+         val lon = -74.40816
+         val maxreturns = 3
+         val getReponse = RestClient.
+
+     }
+
  }

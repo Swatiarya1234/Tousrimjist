@@ -1,16 +1,13 @@
 package com.example.example.Core.Weather.Pojoclasses
 
-data class WeatherPujomain(
-    val base: String,
+data class list(
     val clouds: Clouds,
-    val cod: Int,
-    val coord: Coord,
     val dt: Int,
-    val id: Int,
+    val dt_txt: String,
     val main: Main,
-    val name: String,
+    val pop: Double,
+    val rain: Rain,
     val sys: Sys,
-    val timezone: Int,
     val visibility: Int,
     val weather: List<Weather>,
     val wind: Wind

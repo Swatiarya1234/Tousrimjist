@@ -28,16 +28,16 @@ class Permissions(val context: Activity) : ActivityCompat(),ActivityCompat.OnReq
             }
         }
     }
-    fun askPermission(requestcode: Int, permission:String) {
+    fun askPermission(requestcode: Int, primaryPermission:String,secondaryPermission:String) {
         if (checkSelfPermission(
                 context,
-                permission
+                primaryPermission
             ) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(
                 context,
-                permission
+                secondaryPermission
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            requestPermissions((context as Activity), arrayOf(permission), requestcode)
+            requestPermissions((context as Activity), arrayOf(primaryPermission,secondaryPermission), requestcode)
         } else {
             Toast.makeText(context, "Permission already granted", Toast.LENGTH_LONG).show()
         }

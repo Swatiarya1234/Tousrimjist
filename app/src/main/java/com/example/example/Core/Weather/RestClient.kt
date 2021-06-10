@@ -1,42 +1,29 @@
 package com.example.example.Core.Weather
 import android.util.Log
 import com.example.example.Core.Weather.Pojoclasses.RestClasses
+import com.example.example.Core.Weather.Pojoclasses.WeatherMain
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
 object RestClient {
-
-    public val API:String = "9ddde7bb16caabbd0f16d18d619f1bee"
-    var Data: RestClient? = null
-
-    lateinit var Api: RestClasses
-
+    val APIKEY:String = "9ddde7bb16caabbd0f16d18d619f1bee"
+    private lateinit var api : RestClasses
     val URL ="http://api.openweathermap.org/data/2.5/"
-    //CREATE HTTP CLIENT
-    private val okHttp =OkHttpClient.Builder()
-
-    //retrofit builder
-    private val builder =Retrofit.Builder().baseUrl(URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(getHeader())
-
-    //create retrofit Instance
-    private var retrofit = builder.build()
-
-    //we will use this class to create an anonymous inner class function that
-    //implements Country service Interface
-
+    private  var retrofit :Retrofit ?= null
     fun getClient(): Retrofit? {
         if (retrofit == null) {
             val interceptor = HttpLoggingInterceptor()
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
             retrofit = Retrofit.Builder()
-                .baseUrl(API)
+                .baseUrl(URL)
                 .client(getHeader())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -44,17 +31,11 @@ object RestClient {
         return retrofit
     }
 
-
-
     fun <T> buildService (serviceType :Class<T>):T{
-        return retrofit.create(serviceType)
+        return retrofit!!.create(serviceType)
     }
 
-
-
-
     private fun getHeader(): OkHttpClient {
-
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder()
@@ -79,6 +60,19 @@ object RestClient {
             }
             .build()
     }
-
+    fun responseGenerated() {
+        val latt = 40.7539
+        val lon = -74.9090
+        api = getClient()!!.create(RestClasses::class.java)
+        api.getTasks(latt,lon,APIKEY)!!.enqueue(object : Callback<WeatherMain?> {
+            override fun onResponse(call: Call<WeatherMain?>, response: Response<WeatherMain?>) {
+                if (response.body() != null) {
+                    Log.d("response",response.body().toString())
+                    Log.d("latitude", response.body()!!.city.coord.lat.toString())
+                }
+            }
+            override fun onFailure(call: Call<WeatherMain?>, t: Throwable) {}
+        })
+    }
 
 }

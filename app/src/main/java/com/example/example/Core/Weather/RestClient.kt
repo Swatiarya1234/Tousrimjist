@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-class RestClient {
+object RestClient {
 
     public val API:String = "9ddde7bb16caabbd0f16d18d619f1bee"
     var Data: RestClient? = null

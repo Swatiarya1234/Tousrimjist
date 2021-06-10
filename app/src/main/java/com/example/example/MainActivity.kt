@@ -20,9 +20,6 @@ import retrofit2.Response
  class MainActivity : AppCompatActivity(),View.OnClickListener{
      private lateinit var TabLayout:TabLayout
      private lateinit var latitude:String
-
-//     protected lateinit var textView:TextView
-//     protected lateinit var  values:TextView
      protected lateinit var Permission:Permissions
      protected var  REQUEST_CODE = 1
      protected lateinit var String:String
@@ -31,16 +28,13 @@ import retrofit2.Response
      private lateinit var restClient:RestClient
      private lateinit var restClasses: RestClasses
      private val API:String = "9ddde7bb16caabbd0f16d18d619f1bee"
-
-
-
      override fun onCreate(savedInstanceState: Bundle?) {
 
          super.onCreate(savedInstanceState)
          setContentView(R.layout.activity_main)
          Permission = Permissions(this)
          Permission.askPermission(REQUEST_CODE, Manifest.permission.ACCESS_COARSE_LOCATION);
-          locationListener = Gpstracker(getApplicationContext())
+         locationListener = Gpstracker(getApplicationContext())
          reposnegenerated()
 
      }
@@ -52,15 +46,16 @@ import retrofit2.Response
      fun reposnegenerated() {
          val latt = 40.7539
          val lon = -74.9090
-         var retrofit = api.getTasks(latt,lon,restClient.API)
-         retrofit!!.enqueue(object : Callback<WeatherPujomain?> {
+       //  restClasses = RestClient.buildService(RestClasses::class.java)
+        // restClient = restClasses.getTasks(latt,lon,API)
+         api = RestClient.getClient()!!.create(RestClasses::class.java)
+         api.getTasks(latt,lon,API)!!.enqueue(object : Callback<WeatherPujomain?> {
              override fun onResponse(call: Call<WeatherPujomain?>, response: Response<WeatherPujomain?>) {
                  if (response.body() != null) {
                     latitude  = response.body().toString()
                      Log.d("response",latitude)
                  }
              }
-
              override fun onFailure(call: Call<WeatherPujomain?>, t: Throwable) {}
          })
      }

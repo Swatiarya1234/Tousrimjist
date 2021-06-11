@@ -6,9 +6,5 @@ import retrofit2.http.Query
 
 interface RestClasses {
     @GET("forecast")
-    fun getTasks(@Query("lat") latitide: Double?, @Query("lon")longitude:Double?,@Query("appid") appid: String?): Call<WeatherMain?>?
-
-    companion object {
-        const val Url = "http://api.openweathermap.org/data/2.5/"
-    }
+    fun getWeatherStatus(@Query("lat") latitude: Double?, @Query("lon")longitude:Double?,@Query("appid") appid: String?): Call<WeatherMain?>?
 }

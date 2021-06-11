@@ -2,35 +2,34 @@
 
 import android.Manifest
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.example.Core.Gpstracker
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import com.example.example.Core.GpsTracker
 import com.example.example.Core.Permissions
-import com.example.example.Core.Weather.Pojoclasses.RestClasses
-import com.example.example.Core.Weather.Pojoclasses.WeatherMain
-import com.example.example.Core.Weather.RestClient
+import com.example.example.ViewModel.MainActivityViewModel
+import com.example.example.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
  class MainActivity : AppCompatActivity(),View.OnClickListener{
-     private lateinit var TabLayout:TabLayout
      protected lateinit var Permission:Permissions
      protected var  REQUEST_CODE = 1
      protected lateinit var String:String
-     protected lateinit var locationListener:Gpstracker
-     protected  var restClient:RestClient ? = null
+     protected var  binding: ActivityMainBinding? = null
+     protected lateinit var locationListener:GpsTracker
+     protected lateinit var MainActivityViewModel:MainActivityViewModel
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
-         setContentView(R.layout.activity_main)
+      //   setContentView(R.layout.activity_main)
+         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
          Permission = Permissions(this)
          Permission.askPermission(REQUEST_CODE, Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION);
-         locationListener = Gpstracker(getApplicationContext())
-         restClient = RestClient
-         restClient!!.responseGenerated()
+         locationListener = GpsTracker(getApplicationContext())
+         MainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+         binding!!.viewModel.getUsers()
+
      }
 
      override fun onClick(v: View?) {

@@ -1,35 +1,32 @@
-package com.example.example.Core.Weather
+package com.example.example.Core.CurrencyTracker
+
 import android.util.Log
 import com.example.example.Core.Constants
 import com.example.example.Core.Weather.Pojoclasses.RestClasses
-import com.example.example.Core.Weather.Pojoclasses.WeatherMain
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
-object RestClient {
+object RestClientCurrencyTracker {
 
     private lateinit var api : RestClasses
-    private  var retrofit :Retrofit ?= null
+    private  var retrofit : Retrofit?= null
     fun getClient(): Retrofit? {
         if (retrofit == null) {
             val interceptor = HttpLoggingInterceptor()
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
             retrofit = Retrofit.Builder()
-                .baseUrl(Constants.URL)//Constants for BaseURL
+                .baseUrl(Constants.APIKEYCURRENCYTRACKER)
                 .client(getHeader())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
         return retrofit
     }
+
     fun <T> buildService (serviceType :Class<T>):T{
         return retrofit!!.create(serviceType)
     }
@@ -59,4 +56,5 @@ object RestClient {
             }
             .build()
     }
+
 }

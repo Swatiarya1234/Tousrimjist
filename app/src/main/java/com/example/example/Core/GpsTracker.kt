@@ -6,12 +6,14 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.util.Log
+import com.example.example.databinding.MainActivityBinding
 import java.io.IOException
 import java.util.*
 
-class Gpstracker(val context:Context) : LocationListener {
+class GpsTracker(val context:Context) : LocationListener {
     private lateinit var Location:String
     private lateinit var Latitude:String
+    private lateinit var MainActivityBinding:MainActivityBinding
 
   override fun onLocationChanged(location: Location) {
         getLocationfused(location.getLatitude(),location.getLongitude())
@@ -26,8 +28,9 @@ class Gpstracker(val context:Context) : LocationListener {
                 result.append(address.locality).append("\n")
                 result.append(address.longitude).append("\n")
                // result.append(address.getAddressLine().append("\n"))
-                Log.d("append",address.locality.toString())
-                Log.d("append",address.countryName.toString())
+                Log.d("locality",address.locality.toString())
+                Log.d("country",address.countryName.toString())
+
             }
         }
         catch (e: IOException) {

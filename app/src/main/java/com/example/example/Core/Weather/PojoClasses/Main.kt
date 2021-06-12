@@ -1,4 +1,4 @@
-package com.example.example.Core.Weather.Pojoclasses
+package com.example.example.Core.Weather.PojoClasses
 
 data class Main(
     val feels_like: Double,

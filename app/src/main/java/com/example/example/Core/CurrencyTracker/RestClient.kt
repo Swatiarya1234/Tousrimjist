@@ -2,7 +2,7 @@ package com.example.example.Core.CurrencyTracker
 
 import android.util.Log
 import com.example.example.Core.Constants
-import com.example.example.Core.Weather.Pojoclasses.RestClasses
+import com.example.example.Core.Weather.PojoClasses.RestClasses
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,16 +10,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object RestClientCurrencyTracker {
+object RestClient {
 
+    // iterceptors rest client
     private lateinit var api : RestClasses
     private  var retrofit : Retrofit?= null
-    fun getClient(): Retrofit? {
+    fun getRest(): Retrofit? {
         if (retrofit == null) {
             val interceptor = HttpLoggingInterceptor()
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
             retrofit = Retrofit.Builder()
-                .baseUrl(Constants.APIKEYCURRENCYTRACKER)
+                .baseUrl(Constants.CURRENCYTRACKERURL)
                 .client(getHeader())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -30,7 +31,7 @@ object RestClientCurrencyTracker {
     fun <T> buildService (serviceType :Class<T>):T{
         return retrofit!!.create(serviceType)
     }
-
+// interceptors assigned
     private fun getHeader(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)

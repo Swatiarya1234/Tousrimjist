@@ -1,11 +1,11 @@
-package com.example.example.ViewModel
+package com.example.example.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.example.Core.Constants
-import com.example.example.Core.Weather.Pojoclasses.RestClasses
-import com.example.example.Core.Weather.Pojoclasses.WeatherMain
+import com.example.example.Core.Weather.PojoClasses.RestClasses
+import com.example.example.Core.Weather.PojoClasses.WeatherMain
 import com.example.example.Core.Weather.RestClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,16 +20,16 @@ class MainActivityViewModel: ViewModel() {
     fun getUsers(): LiveData<WeatherMain?>? {
         if (users == null) {
             users = MutableLiveData<WeatherMain>()
-            getWeatherData(0.00000,0.223333)
+            //getWeatherData(0.00000,0.223333)
         }
         return users
     }
 
-    fun getWeatherData(latitude:Double,longitude:Double) {
+    fun getWeatherData() {
         val latt = 40.7539
         val lon = -74.9090
         api = RestClient.getClient()!!.create(RestClasses::class.java)
-        api.getWeatherStatus(latt,lon, Constants.APIKEY)!!.enqueue(object :
+        api.getWeatherStatus(latt,lon, Constants.WEATHERURL)!!.enqueue(object :
             Callback<WeatherMain?> {
             override fun onResponse(call: Call<WeatherMain?>, response: Response<WeatherMain?>) {
                 if (response.body() != null) {

@@ -1,4 +1,4 @@
-package com.example.example.Core.Weather.Pojoclasses
+package com.example.example.Core.Weather.PojoClasses
 
 import retrofit2.Call
 import retrofit2.http.GET

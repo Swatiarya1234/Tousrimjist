@@ -7,10 +7,9 @@
 
     <data>
         <variable
-            name="ViewModel"
-            type="com.example.example.ViewModel.MainActivityViewModel" />
+            name="viewModel"
+            type="com.example.example.viewModel.MainActivityViewModel" />
     </data>
-
 
 <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -39,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/latitude"
-            android:text="@{ViewModel.users.cod}"
+            android:text="@{viewModel.users.cod}"
             android:textSize="12dp"
             android:layout_marginRight="234dp"
             android:layout_marginTop="45dp"
@@ -51,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/longitude"
-            android:text="@{ViewModel.users.cnt}"
+            android:text="@{viewModel.users.cnt}"
             android:textColor="#000"
             android:textStyle="bold"
             android:textSize="12dp"
@@ -93,7 +92,7 @@
             android:layout_marginEnd="23dp"
             android:layout_alignParentEnd="true" />
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/relativeRelative2"
@@ -120,7 +119,17 @@
 
           </com.google.android.material.appbar.AppBarLayout>
 
-        </FrameLayout>
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="345dp"
+                android:layout_marginLeft="156dp"
+                android:text="OnClick">
+
+            </Button>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

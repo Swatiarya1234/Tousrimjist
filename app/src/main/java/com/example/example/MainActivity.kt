@@ -8,9 +8,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.example.example.Core.GpsTracker
 import com.example.example.Core.Permissions
-import com.example.example.ViewModel.MainActivityViewModel
+import com.example.example.Core.factoryMethods.mainActivityviewmodelFactory
+import com.example.example.viewModel.MainActivityViewModel
 import com.example.example.databinding.ActivityMainBinding
-import com.google.android.material.tabs.TabLayout
 
 
  class MainActivity : AppCompatActivity(),View.OnClickListener{
@@ -19,7 +19,7 @@ import com.google.android.material.tabs.TabLayout
      protected lateinit var String:String
      protected var  binding: ActivityMainBinding? = null
      protected lateinit var locationListener:GpsTracker
-     protected lateinit var MainActivityViewModel:MainActivityViewModel
+     protected var MainActivityViewModel:MainActivityViewModel ? = null
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
       //   setContentView(R.layout.activity_main)
@@ -27,9 +27,9 @@ import com.google.android.material.tabs.TabLayout
          Permission = Permissions(this)
          Permission.askPermission(REQUEST_CODE, Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION);
          locationListener = GpsTracker(getApplicationContext())
-         MainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-         binding!!.viewModel.getUsers()
-
+         val factory = mainActivityviewmodelFactory()
+         MainActivityViewModel = ViewModelProviders.of(this,factory).get(MainActivityViewModel!!::class.java)
+         binding!!.viewModel = MainActivityViewModel
      }
 
      override fun onClick(v: View?) {

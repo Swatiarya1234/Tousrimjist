@@ -1,14 +1,10 @@
 package com.example.example.Core.Weather
 import android.util.Log
 import com.example.example.Core.Constants
-import com.example.example.Core.Weather.Pojoclasses.RestClasses
-import com.example.example.Core.Weather.Pojoclasses.WeatherMain
+import com.example.example.Core.Weather.PojoClasses.RestClasses
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -18,12 +14,13 @@ object RestClient {
 
     private lateinit var api : RestClasses
     private  var retrofit :Retrofit ?= null
+//  retrofit cleint
     fun getClient(): Retrofit? {
         if (retrofit == null) {
             val interceptor = HttpLoggingInterceptor()
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
             retrofit = Retrofit.Builder()
-                .baseUrl(Constants.URL)//Constants for BaseURL
+                .baseUrl(Constants.WEATHERURL)//Constants for BaseURL
                 .client(getHeader())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -33,7 +30,7 @@ object RestClient {
     fun <T> buildService (serviceType :Class<T>):T{
         return retrofit!!.create(serviceType)
     }
-
+// interceptors assigned
     private fun getHeader(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)

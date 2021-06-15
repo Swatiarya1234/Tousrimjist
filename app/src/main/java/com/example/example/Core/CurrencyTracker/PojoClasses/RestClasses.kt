@@ -8,6 +8,6 @@ import retrofit2.http.Query
 interface RestClasses {
 
     @GET("convert")
-    fun getCurrencyStatus(@Query("q") currency: String?, @Query("compact") appid:String?, @Query("apiKey") apikey: String?): Call<WeatherMain?>?
+    fun getCurrencyStatus(@Query("q") Usd_php: String?, @Query("compact") appid:String?, @Query("apiKey") apikey: String?): Call<CurrencyTrackerMain?>?
 
 }

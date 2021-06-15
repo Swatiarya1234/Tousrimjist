@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.example.Core.Constants
 import com.example.example.Core.CurrencyTracker.PojoClasses.CurrencyTrackerMain
-import com.example.example.Core.Weather.PojoClasses.RestClasses
+import com.example.example.Core.CurrencyTracker.CurrencyTracker
+
+import com.example.example.Core.CurrencyTracker.PojoClasses.RestClasses
+import com.example.example.Core.CurrencyTracker.RestClient
 import com.example.example.Core.Weather.PojoClasses.WeatherMain
-import com.example.example.Core.Weather.RestClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,7 +17,10 @@ import retrofit2.Response
 class currencyTrackerViewModel :ViewModel() {
     private var currencyTrackerMain: MutableLiveData<CurrencyTrackerMain>? = null
     private var currencyTracker: MutableLiveData<String> ? = null
-    private lateinit var api : RestClasses
+    private lateinit var api :RestClasses
+    private val USD_PHP:String = "USD_PHP"
+    private val compact:String = "ultra"
+
     fun getUsers(): LiveData<CurrencyTrackerMain?>? {
         if (currencyTrackerMain == null) {
             currencyTrackerMain = MutableLiveData<CurrencyTrackerMain>()
@@ -23,18 +28,17 @@ class currencyTrackerViewModel :ViewModel() {
         }
         return currencyTrackerMain
     }
+    // rest please do have this please
     fun getlatitude() {
-        val latt = 40.7539
-        val lon = -74.9090
-        api = RestClient.getClient()!!.create(RestClasses::class.java)
-        api.getWeatherStatus(latt,lon, Constants.WEATHERURL)!!.enqueue(object :
-            Callback<WeatherMain?> {
-            override fun onResponse(call: Call<WeatherMain?>, response: Response<WeatherMain?>) {
+        api = RestClient.getRest()!!.create(RestClasses::class.java)
+        api.getCurrencyStatus(USD_PHP,compact,Constants.CURRENCYTRACKERAPIKEY)!!.enqueue(object :
+            Callback<CurrencyTrackerMain?> {
+            override fun onResponse(call: Call<CurrencyTrackerMain?>, response: Response<CurrencyTrackerMain?>) {
                 if (response.body() != null) {
-                     currencyTracker!!.setValue((currencyTrackerMain == null) null else currencyTrackerMain!!.value!!.city.country)
+
                 }
             }
-            override fun onFailure(call: Call<WeatherMain?>, t: Throwable) {}
+            override fun onFailure(call: Call<CurrencyTrackerMain?>, t: Throwable) {}
         })
     }
 

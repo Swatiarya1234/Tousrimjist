@@ -3,17 +3,19 @@
 import android.Manifest
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.example.example.Core.GpsTracker
 import com.example.example.Core.Permissions
 import com.example.example.Core.factoryMethods.mainActivityviewmodelFactory
+import com.example.example.OnClickInterfaces.mainActivityclicklistner
 import com.example.example.viewModel.MainActivityViewModel
 import com.example.example.databinding.ActivityMainBinding
 
 
- class MainActivity : AppCompatActivity(),View.OnClickListener{
+ class MainActivity : AppCompatActivity(),View.OnClickListener,mainActivityclicklistner{
      protected lateinit var Permission:Permissions
      protected var  REQUEST_CODE = 1
      protected lateinit var String:String
@@ -37,6 +39,11 @@ import com.example.example.databinding.ActivityMainBinding
 
         }
     }
+
+     override fun onClickListner(view: View) {
+
+         Toast.makeText(this,"Make test",Toast.LENGTH_SHORT).show();
+     }
 
 
  }

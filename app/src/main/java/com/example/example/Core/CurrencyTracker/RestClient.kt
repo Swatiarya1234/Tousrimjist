@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 
 object RestClient {
 
-    // iterceptors rest client
+    // iterceptors rest cleint please do have
     private lateinit var api : RestClasses
     private  var retrofit : Retrofit?= null
     fun getRest(): Retrofit? {

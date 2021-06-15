@@ -14,7 +14,7 @@ object RestClient {
 
     private lateinit var api : RestClasses
     private  var retrofit :Retrofit ?= null
-//  retrofit cleint
+//  retrofit cleint 
     fun getClient(): Retrofit? {
         if (retrofit == null) {
             val interceptor = HttpLoggingInterceptor()

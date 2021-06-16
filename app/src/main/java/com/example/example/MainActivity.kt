@@ -1,6 +1,7 @@
  package com.example.example
 
 import android.Manifest
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,18 +11,20 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.example.Core.GpsTracker
 import com.example.example.Core.Permissions
 import com.example.example.Core.factoryMethods.mainActivityviewmodelFactory
-import com.example.example.OnClickInterfaces.mainActivityclicklistner
-import com.example.example.viewModel.MainActivityViewModel
+import com.example.example.OnClickInterfaces.MainActivityClicklistner
+import com.example.example.viewModel.mainActivityViewmodel
 import com.example.example.databinding.ActivityMainBinding
 
 
- class MainActivity : AppCompatActivity(),View.OnClickListener,mainActivityclicklistner{
+ class MainActivity : AppCompatActivity(),View.OnClickListener,MainActivityClicklistner{
+
      protected lateinit var Permission:Permissions
      protected var  REQUEST_CODE = 1
      protected lateinit var String:String
      protected var  binding: ActivityMainBinding? = null
      protected lateinit var locationListener:GpsTracker
-     protected var MainActivityViewModel:MainActivityViewModel ? = null
+     protected lateinit var locationManager: LocationManager
+     protected var MainActivityViewModel:mainActivityViewmodel ? = null
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
       //   setContentView(R.layout.activity_main)

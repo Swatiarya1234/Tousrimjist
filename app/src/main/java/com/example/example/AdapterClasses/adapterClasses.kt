@@ -9,7 +9,7 @@ import com.example.example.Fragments.Restrurants
 import com.example.example.Fragments.Room
 import java.util.ArrayList
 
-class AdapterClasses(fm: FragmentManager) : FragmentPagerAdapter(fm)  {
+class adapterClasses(fm: FragmentManager) : FragmentPagerAdapter(fm)  {
 
     private val MfragemntList = ArrayList<Fragment>()
     private val mFragmentList = ArrayList<String>()
@@ -28,6 +28,5 @@ class AdapterClasses(fm: FragmentManager) : FragmentPagerAdapter(fm)  {
        MfragemntList.add(fragment)
        mFragmentList.add(title)
    }
-
 
 }

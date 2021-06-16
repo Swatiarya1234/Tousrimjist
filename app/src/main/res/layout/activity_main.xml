@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="viewModel"
-            type="com.example.example.viewModel.MainActivityViewModel" />
-    </data>
+            type="com.example.example.viewModel.mainActivityViewmodel" />
 
-    <data>
         <variable
-            name="Clicklistner"
-            type="com.example.example.OnClickInterfaces.mainActivityclicklistner" />
+            name="clicklistner"
+            type="com.example.example.OnClickInterfaces.MainActivityClicklistner" />
     </data>
 
 
@@ -134,7 +130,7 @@
                 android:layout_marginTop="345dp"
                 android:layout_marginLeft="156dp"
                 android:text="OnClick"
-                android:onClick="@{(v) -> Clicklistner.mainActivitylistner(v)}">
+                android:onClick="@{(view) -> clicklistner.MainActivityClicklitner(view)}">
 
             </Button>
 

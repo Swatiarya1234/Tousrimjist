@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.example.Core.Constants
-import com.example.example.Core.Weather.PojoClasses.RestClasses
+import com.example.example.Core.Weather.PojoClasses.restClasses
 import com.example.example.Core.Weather.PojoClasses.WeatherMain
 import com.example.example.Core.Weather.RestClient
 import retrofit2.Call
@@ -12,11 +12,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MainActivityViewModel: ViewModel() {
+class mainActivityViewmodel: ViewModel() {
     private var users: MutableLiveData<WeatherMain>? = null
     private var latitudeString : MutableLiveData<String> ? = null
     private var longitudeString : MutableLiveData<String> ? = null
-    private lateinit var api : RestClasses
+    private lateinit var api : restClasses
     fun getUsers(): LiveData<WeatherMain?>? {
         if (users == null) {
             users = MutableLiveData<WeatherMain>()
@@ -28,7 +28,7 @@ class MainActivityViewModel: ViewModel() {
     fun getWeatherData() {
         val latt = 40.7539
         val lon = -74.9090
-        api = RestClient.getClient()!!.create(RestClasses::class.java)
+        api = RestClient.getClient()!!.create(restClasses::class.java)
         api.getWeatherStatus(latt,lon, Constants.WEATHERURL)!!.enqueue(object :
             Callback<WeatherMain?> {
             override fun onResponse(call: Call<WeatherMain?>, response: Response<WeatherMain?>) {

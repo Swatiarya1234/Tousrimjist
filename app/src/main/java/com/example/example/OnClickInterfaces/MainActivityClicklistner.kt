@@ -2,6 +2,6 @@ package com.example.example.OnClickInterfaces
 
 import android.view.View
 
-interface mainActivityclicklistner {
+interface MainActivityClicklistner {
     fun onClickListner(view: View)
 }

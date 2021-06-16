@@ -1,7 +1,7 @@
 package com.example.example.Core.Weather
 import android.util.Log
 import com.example.example.Core.Constants
-import com.example.example.Core.Weather.PojoClasses.RestClasses
+import com.example.example.Core.Weather.PojoClasses.restClasses
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,10 +12,11 @@ import java.util.concurrent.TimeUnit
 
 object RestClient {
 
-    private lateinit var api : RestClasses
+    private lateinit var api : restClasses
     private  var retrofit :Retrofit ?= null
 //  retrofit cleint 
     fun getClient(): Retrofit? {
+
         if (retrofit == null) {
             val interceptor = HttpLoggingInterceptor()
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)

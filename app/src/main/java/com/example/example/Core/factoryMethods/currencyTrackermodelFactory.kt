@@ -2,7 +2,6 @@ package com.example.example.Core.factoryMethods
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.example.viewModel.MainActivityViewModel
 
 class currencyTrackermodelFactory(): ViewModelProvider.Factory {
 

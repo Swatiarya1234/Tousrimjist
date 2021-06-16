@@ -5,11 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.example.Core.Constants
 import com.example.example.Core.CurrencyTracker.PojoClasses.CurrencyTrackerMain
-import com.example.example.Core.CurrencyTracker.CurrencyTracker
 
-import com.example.example.Core.CurrencyTracker.PojoClasses.RestClasses
+import com.example.example.Core.CurrencyTracker.PojoClasses.restClasses
 import com.example.example.Core.CurrencyTracker.RestClient
-import com.example.example.Core.Weather.PojoClasses.WeatherMain
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,9 +15,8 @@ import retrofit2.Response
 class currencyTrackerViewModel :ViewModel() {
     private var currencyTrackerMain: MutableLiveData<CurrencyTrackerMain>? = null
     private var currencyTracker: MutableLiveData<String> ? = null
-    private lateinit var api :RestClasses
-    private val USD_PHP:String = "USD_PHP"
-    private val compact:String = "ultra"
+    private lateinit var api :restClasses
+
 
     fun getUsers(): LiveData<CurrencyTrackerMain?>? {
         if (currencyTrackerMain == null) {
@@ -30,8 +27,8 @@ class currencyTrackerViewModel :ViewModel() {
     }
     // rest please do have this please
     fun getlatitude() {
-        api = RestClient.getRest()!!.create(RestClasses::class.java)
-        api.getCurrencyStatus(USD_PHP,compact,Constants.CURRENCYTRACKERAPIKEY)!!.enqueue(object :
+        api = RestClient.getRest()!!.create(restClasses::class.java)
+        api.getCurrencyStatus(Constants.USD_PHP,Constants.compact,Constants.CURRENCYTRACKERAPIKEY)!!.enqueue(object :
             Callback<CurrencyTrackerMain?> {
             override fun onResponse(call: Call<CurrencyTrackerMain?>, response: Response<CurrencyTrackerMain?>) {
                 if (response.body() != null) {

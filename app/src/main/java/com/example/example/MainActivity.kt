@@ -1,22 +1,22 @@
  package com.example.example
 
 import android.Manifest
+import android.content.Intent
 import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import com.example.example.Core.GpsTracker
-import com.example.example.Core.Permissions
-import com.example.example.Core.factoryMethods.mainActivityviewmodelFactory
-import com.example.example.OnClickInterfaces.MainActivityClicklistner
-import com.example.example.viewModel.mainActivityViewmodel
+import com.example.example.core.currencyTracker.CurrencyTracker
+import com.example.example.core.GpsTracker
+import com.example.example.core.Permissions
+import com.example.example.clickInterfaces.MainActivityClickListener
+import com.example.example.viewModel.MainActivityViewmodel
 import com.example.example.databinding.ActivityMainBinding
 
 
- class MainActivity : AppCompatActivity(),View.OnClickListener,MainActivityClicklistner{
+ class MainActivity : AppCompatActivity(),View.OnClickListener,MainActivityClickListener{
 
      protected lateinit var Permission:Permissions
      protected var  REQUEST_CODE = 1
@@ -24,17 +24,18 @@ import com.example.example.databinding.ActivityMainBinding
      protected var  binding: ActivityMainBinding? = null
      protected lateinit var locationListener:GpsTracker
      protected lateinit var locationManager: LocationManager
-     protected var MainActivityViewModel:mainActivityViewmodel ? = null
+     protected  lateinit var MainActivityViewmodel : MainActivityViewmodel
+
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
-      //   setContentView(R.layout.activity_main)
+         setContentView(R.layout.activity_main)
          binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
          Permission = Permissions(this)
          Permission.askPermission(REQUEST_CODE, Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION);
          locationListener = GpsTracker(getApplicationContext())
-         val factory = mainActivityviewmodelFactory()
-         MainActivityViewModel = ViewModelProviders.of(this,factory).get(MainActivityViewModel!!::class.java)
-         binding!!.viewModel = MainActivityViewModel
+         MainActivityViewmodel = ViewModelProviders.of(this).get(MainActivityViewmodel!!::class.java)
+         binding!!.viewModel = MainActivityViewmodel
+
      }
 
      override fun onClick(v: View?) {
@@ -43,9 +44,9 @@ import com.example.example.databinding.ActivityMainBinding
         }
     }
 
-     override fun onClickListner(view: View) {
-
-         Toast.makeText(this,"Make test",Toast.LENGTH_SHORT).show();
+     override fun onClickListener(view: View){
+         val intent: Intent = Intent(this,CurrencyTracker::class.java)
+         startActivity(intent)
      }
 
 

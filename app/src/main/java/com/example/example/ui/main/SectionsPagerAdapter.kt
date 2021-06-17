@@ -1,14 +1,13 @@
 package com.example.example.ui.main
 
 import android.content.Context
-import android.provider.CallLog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.example.Fragments.Guests
-import com.example.example.Fragments.Hotels
-import com.example.example.Fragments.Restrurants
-import com.example.example.Fragments.Room
+import com.example.example.fragments.Guests
+import com.example.example.fragments.Hotels
+import com.example.example.fragments.Restrurants
+import com.example.example.fragments.Room
 import com.example.example.R
 
 private val TAB_TITLES = arrayOf(

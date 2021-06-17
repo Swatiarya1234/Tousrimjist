@@ -6,11 +6,12 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.example.viewModel.mainActivityViewmodel" />
+            type="com.example.example.viewModel.MainActivityViewmodel" />
 
         <variable
-            name="clicklistner"
-            type="com.example.example.OnClickInterfaces.MainActivityClicklistner" />
+            name="clickListener"
+            type="com.example.example.clickInterfaces.MainActivityClickListener" />
+
     </data>
 
 
@@ -130,7 +131,7 @@
                 android:layout_marginTop="345dp"
                 android:layout_marginLeft="156dp"
                 android:text="OnClick"
-                android:onClick="@{(view) -> clicklistner.MainActivityClicklitner(view)}">
+                android:onClick="@{(view) -> clickListener.onClickListener(view)}">
 
             </Button>
 

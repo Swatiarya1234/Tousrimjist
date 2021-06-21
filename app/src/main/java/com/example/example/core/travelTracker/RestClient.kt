@@ -2,7 +2,7 @@ package com.example.example.core.travelTracker
 
 import android.util.Log
 import com.example.example.core.Constants
-import com.example.example.core.weather.pojoClasses.restClasses
+import com.example.example.core.weather.pojoClasses.RestClasses
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 
 object RestClient {
 
-    private lateinit var api : restClasses
+    private lateinit var api : RestClasses
     private  var retrofit : Retrofit?= null
 
     fun getRest(): Retrofit? {
@@ -22,7 +22,7 @@ object RestClient {
             val interceptor = HttpLoggingInterceptor()
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
             retrofit = Retrofit.Builder()
-                .baseUrl(Constants.CURRENCYTRACKERURL)
+                .baseUrl(Constants.CURRENCY_TRACKER_URL)
                 .client(getHeader())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

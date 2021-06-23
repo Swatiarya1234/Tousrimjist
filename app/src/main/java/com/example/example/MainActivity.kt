@@ -1,18 +1,22 @@
  package com.example.example
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.work.WorkerParameters
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.example.core.currencyTracker.CurrencyTracker
-import com.example.example.core.gpsTracker.GpsTracker
 import com.example.example.clickInterfaces.MainActivityClickListener
-import com.example.example.core.factoryMethods.MainActivityviewmodelFactory
+import com.example.example.core.Constants
+import com.example.example.core.gpsTracker.GpsTracker
 import com.example.example.core.gpsTracker.GpsTrackerWorkManager
-import com.example.example.viewModel.MainActivityViewmodel
+import com.example.example.core.gpsTracker.GpsTrackerWorker
 import com.example.example.databinding.ActivityMainBinding
 
 
@@ -21,18 +25,33 @@ import com.example.example.databinding.ActivityMainBinding
      protected var  REQUEST_CODE = 1
      protected lateinit var String:String
      protected var  binding: ActivityMainBinding? = null
-     protected lateinit var CurrencyTrackermodelFactory : MainActivityviewmodelFactory
-     protected  lateinit var MainActivityViewmodel : MainActivityViewmodel
+     //this is a static method which can be called directly
+     companion object{
+              @SuppressLint("StaticFieldLeak")
+              lateinit var context:Context
+     }
 
      @RequiresApi(Build.VERSION_CODES.M)
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
           setContentView(R.layout.activity_main)
+          context = this
        //   binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-            GpsTrackerWorkManager.refreshPeriodicWork(applicationContext)
+         getPermissions()
+            GpsTrackerWorkManager.refreshPeriodicWork(this)
+
+
 //          MainActivityViewmodel = ViewModelProvider(this,CurrencyTrackermodelFactory).get(MainActivityViewmodel!!::class.java)
 //          binding!!.viewModel = MainActivityViewmodel
+     }
 
+     private fun getPermissions() {
+         if ((ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+             ActivityCompat.requestPermissions(
+                 this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                 Constants.LOCATION_PERMISSION_CODE
+             )
+         }
      }
 
      override fun onClick(v: View?) {

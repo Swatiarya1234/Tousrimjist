@@ -29,7 +29,6 @@ class GpsTrackerWorker(val context: Context, workerParams: WorkerParameters) : C
              GpsTracker.getInstance()!!)
         Looper.loop()
        //  Log.d("request location update","request location upadted")
-
     }
 
     override suspend fun doWork(): Result {

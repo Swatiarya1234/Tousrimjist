@@ -26,6 +26,7 @@ class GpsTracker private constructor():LocationListener {
         getLocationfused(location.getLatitude(),location.getLongitude())
         Log.d("latitude",location.latitude.toString())
         Log.d("longitude",location.longitude.toString())
+
     }
 
     private fun getLocationfused(latitude: Double, longitude: Double): String {

@@ -8,5 +8,4 @@ object Constants {
     val USD_PHP:String = "USD_PHP"
     val COMPACT:String = "ultra"
     val LOCATION_PERMISSION_CODE = 1
-
 }

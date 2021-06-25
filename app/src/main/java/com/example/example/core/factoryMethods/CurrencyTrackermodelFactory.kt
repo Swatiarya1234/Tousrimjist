@@ -6,9 +6,10 @@ import androidx.lifecycle.ViewModelProvider
 class CurrencyTrackermodelFactory(): ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(CurrencyTrackermodelFactory::class.java)){
+        if(modelClass.isAssignableFrom(CurrencyTrackermodelFactory::class.java)) {
             return CurrencyTrackermodelFactory() as T
         }
+
         throw IllegalArgumentException ("UnknownViewModel")
     }
 }

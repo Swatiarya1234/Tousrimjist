@@ -22,9 +22,7 @@ import com.example.example.databinding.ActivityMainBinding
 
  class MainActivity : AppCompatActivity(),View.OnClickListener,MainActivityClickListener{
 
-     protected var  REQUEST_CODE = 1
      protected lateinit var String:String
-     protected var  binding: ActivityMainBinding? = null
      //this is a static method which can be called directly
      companion object{
               @SuppressLint("StaticFieldLeak")
@@ -37,18 +35,16 @@ import com.example.example.databinding.ActivityMainBinding
           setContentView(R.layout.activity_main)
           context = this
        //   binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-         getPermissions()
+            getPermissions()
             GpsTrackerWorkManager.refreshPeriodicWork(this)
-
-
-//          MainActivityViewmodel = ViewModelProvider(this,CurrencyTrackermodelFactory).get(MainActivityViewmodel!!::class.java)
+     //          MainActivityViewmodel = ViewModelProvider(this,CurrencyTrackermodelFactory).get(MainActivityViewmodel!!::class.java)
 //          binding!!.viewModel = MainActivityViewmodel
      }
 
      private fun getPermissions() {
          if ((ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
              ActivityCompat.requestPermissions(
-                 this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                 this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION),
                  Constants.LOCATION_PERMISSION_CODE
              )
          }
@@ -61,6 +57,7 @@ import com.example.example.databinding.ActivityMainBinding
     }
 
      override fun onClickListener(view: View){
+         
          val intent: Intent = Intent(this,CurrencyTracker::class.java)
          startActivity(intent)
      }

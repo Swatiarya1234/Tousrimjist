@@ -25,19 +25,4 @@ class MainActivityViewmodel: ViewModel() {
         return users
     }
 
-    fun getWeatherData() {
-        val latt = 40.7539
-        val lon = -74.9090
-        api = RestClient.getClient()!!.create(RestClasses::class.java)
-        api.getWeatherStatus(latt,lon, Constants.WEATHER_API_KEY)!!.enqueue(object :
-            Callback<WeatherMain?> {
-            override fun onResponse(call: Call<WeatherMain?>, response: Response<WeatherMain?>) {
-                if (response.body() != null) {
-                    latitudeString!!.setValue(if (users == null) null else users!!.value!!.city.country)
-                    longitudeString!!.setValue(if (users == null) null else users!!.value!!.city.name)
-                }
-            }
-            override fun onFailure(call: Call<WeatherMain?>, t: Throwable) {}
-        })
-    }
 }

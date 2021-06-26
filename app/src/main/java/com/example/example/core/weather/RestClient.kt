@@ -2,9 +2,13 @@ package com.example.example.core.weather
 import android.util.Log
 import com.example.example.core.Constants
 import com.example.example.core.weather.pojoClasses.RestClasses
+import com.example.example.core.weather.pojoClasses.WeatherMain
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -31,6 +35,21 @@ object RestClient {
     }
     fun <T> buildService (serviceType :Class<T>):T{
         return retrofit!!.create(serviceType)
+    }
+
+    fun getWeatherData(latitude:Double, longitude:Double) {
+        api = RestClient.getClient()!!.create(RestClasses::class.java)
+        api.getWeatherStatus(latitude,longitude, Constants.WEATHER_API_KEY)!!.enqueue(object :
+            Callback<WeatherMain?> {
+            override fun onResponse(call: Call<WeatherMain?>, response: Response<WeatherMain?>) {
+                if (response.body() != null) {
+
+//                    latitudeString!!.setValue(if (users == null) null else users!!.value!!.city.country)
+//                    longitudeString!!.setValue(if (users == null) null else users!!.value!!.city.name)
+                }
+            }
+            override fun onFailure(call: Call<WeatherMain?>, t: Throwable) {}
+        })
     }
 // interceptors assigned
     private fun getHeader(): OkHttpClient {

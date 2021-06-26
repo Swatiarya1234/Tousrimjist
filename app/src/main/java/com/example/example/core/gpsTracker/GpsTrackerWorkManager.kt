@@ -18,7 +18,7 @@ object GpsTrackerWorkManager {
 //            .setRequiresDeviceIdle(true)
 //            .build()
 
-        val refreshCpnWork = PeriodicWorkRequest.Builder(GpsTrackerWorker::class.java, 1, TimeUnit.SECONDS)
+        val refreshCpnWork = PeriodicWorkRequest.Builder(GpsTrackerWorker::class.java, 15, TimeUnit.MINUTES)
             .setInitialDelay(0, TimeUnit.MINUTES)
             .addTag("GpsTrackerWorkManager")
             .build()

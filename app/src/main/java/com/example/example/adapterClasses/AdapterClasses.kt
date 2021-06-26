@@ -9,7 +9,6 @@ class AdapterClasses(fm: FragmentManager) : FragmentPagerAdapter(fm)  {
 
     private val MfragemntList = ArrayList<Fragment>()
     private val mFragmentList = ArrayList<String>()
-
     override fun getCount(): Int {
         return mFragmentList.size
     }

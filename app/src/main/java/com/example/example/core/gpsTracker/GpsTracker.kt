@@ -5,10 +5,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.util.Log
-import com.example.example.MainActivity
 import com.example.example.core.gpsTracker.delegate.GpsDelegate
-import com.example.example.core.gpsTracker.delegate.GpsProperties
-import com.example.example.core.weather.pojoClasses.Main
 import java.io.IOException
 import java.util.*
 
@@ -20,7 +17,7 @@ class GpsTracker private constructor():LocationListener {
         lateinit var gpsDelegate:GpsDelegate
         fun getInstance(): GpsTracker? {
             if (instance == null) {
-                gpsDelegate = GpsDelegate()
+              //  gpsDelegate = GpsDelegate()
                 instance = GpsTracker()
 
             }

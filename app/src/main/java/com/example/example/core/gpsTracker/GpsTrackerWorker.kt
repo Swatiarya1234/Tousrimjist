@@ -1,20 +1,12 @@
 package com.example.example.core.gpsTracker
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.Application
 import android.content.Context
-import android.content.pm.PackageManager
 import android.location.*
 import android.os.Looper
 import android.util.Log
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.example.example.core.Constants
-import java.io.IOException
-import java.util.*
 
 class GpsTrackerWorker(val context: Context, workerParams: WorkerParameters) : CoroutineWorker(context, workerParams){
     private val mainContext:Context

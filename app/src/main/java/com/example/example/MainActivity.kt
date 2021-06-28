@@ -1,4 +1,4 @@
- package com.example.examplegi
+ package com.example.example
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.example.R
 import com.example.example.core.currencyTracker.CurrencyTracker
 import com.example.example.clickInterfaces.MainActivityClickListener
 import com.example.example.core.Constants
@@ -33,7 +34,7 @@ import com.example.example.databinding.ActivityMainBinding
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
           setContentView(R.layout.activity_main)
-          context = this
+            context = this
        //   binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
             getPermissions()
             GpsTrackerWorkManager.refreshPeriodicWork(this)
@@ -57,7 +58,7 @@ import com.example.example.databinding.ActivityMainBinding
     }
 
      override fun onClickListener(view: View){
-         
+
          val intent: Intent = Intent(this,CurrencyTracker::class.java)
          startActivity(intent)
      }

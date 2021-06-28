@@ -6,15 +6,17 @@ import android.location.Location
 import android.location.LocationListener
 import android.util.Log
 import com.example.example.core.gpsTracker.delegate.GpsDelegate
+import com.example.example.MainActivity
+import com.example.example.core.gpsTracker.delegate.GpsProperties
 import java.io.IOException
 import java.util.*
 
 class GpsTracker private constructor():LocationListener {
 
+    private lateinit var gpsProperties:GpsProperties
 
     companion object {
         private var instance: GpsTracker? = null
-        lateinit var gpsDelegate:GpsDelegate
         fun getInstance(): GpsTracker? {
             if (instance == null) {
               //  gpsDelegate = GpsDelegate()
@@ -27,6 +29,7 @@ class GpsTracker private constructor():LocationListener {
 
     override fun onLocationChanged(location: Location) {
         getLocationfused(location.getLatitude(),location.getLongitude())
+
     }
 
     private fun getLocationfused(latitude: Double, longitude: Double): String {
@@ -41,6 +44,7 @@ class GpsTracker private constructor():LocationListener {
                  // result.append(address.getAddressLine().append("\n"))
                   var countryName   = address.locality.toString()
                   var country = address.countryName.toString()
+                  gpsProperties = GpsProperties(latitude, longitude, country)
             }
         }
         catch (e: IOException) {

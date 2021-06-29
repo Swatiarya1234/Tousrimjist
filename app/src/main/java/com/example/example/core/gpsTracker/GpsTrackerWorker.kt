@@ -19,8 +19,8 @@ class GpsTrackerWorker(val context: Context, workerParams: WorkerParameters) : C
         val  locationManager = mainContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
          locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f,
              GpsTracker.getInstance()!!)
-        Looper.loop()
-       //  Log.d("request location update","request location upadted")
+         Looper.loop()
+         Log.d("request location update","request location upadted")
     }
 
     override suspend fun doWork(): Result {

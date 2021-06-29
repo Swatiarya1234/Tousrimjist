@@ -12,26 +12,19 @@ import java.io.IOException
 import java.util.*
 
 class GpsTracker private constructor():LocationListener {
-
-    private lateinit var gpsProperties:GpsProperties
-
     companion object {
         private var instance: GpsTracker? = null
         fun getInstance(): GpsTracker? {
             if (instance == null) {
-              //  gpsDelegate = GpsDelegate()
                 instance = GpsTracker()
-
             }
             return instance
         }
     }
-
     override fun onLocationChanged(location: Location) {
         getLocationfused(location.getLatitude(),location.getLongitude())
 
     }
-
     private fun getLocationfused(latitude: Double, longitude: Double): String {
         val result = java.lang.StringBuilder()
         try {
@@ -44,7 +37,7 @@ class GpsTracker private constructor():LocationListener {
                  // result.append(address.getAddressLine().append("\n"))
                   var countryName   = address.locality.toString()
                   var country = address.countryName.toString()
-                  gpsProperties = GpsProperties(latitude, longitude, country)
+                  GpsDelegate.getInstance()!!.gpsProperties = GpsProperties(latitude, longitude, country)
             }
         }
         catch (e: IOException) {

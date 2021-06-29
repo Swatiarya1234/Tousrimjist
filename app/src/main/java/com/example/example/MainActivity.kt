@@ -26,8 +26,7 @@ import com.example.example.databinding.ActivityMainBinding
      protected lateinit var String:String
      //this is a static method which can be called directly
      companion object{
-              @SuppressLint("StaticFieldLeak")
-              lateinit var context:Context
+         var context:Context ? = null
      }
 
      @RequiresApi(Build.VERSION_CODES.M)
@@ -38,6 +37,8 @@ import com.example.example.databinding.ActivityMainBinding
        //   binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
             getPermissions()
             GpsTrackerWorkManager.refreshPeriodicWork(this)
+
+
      //          MainActivityViewmodel = ViewModelProvider(this,CurrencyTrackermodelFactory).get(MainActivityViewmodel!!::class.java)
 //          binding!!.viewModel = MainActivityViewmodel
      }

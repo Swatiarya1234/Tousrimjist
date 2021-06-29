@@ -1,5 +1,7 @@
 package com.example.example.core.gpsTracker.delegate
 
+import android.util.Log
+import com.example.example.core.gpsTracker.GpsTracker
 import com.example.example.core.weather.RestClient
 import com.example.example.core.weather.pojoClasses.WeatherMain
 import kotlin.properties.Delegates.observable
@@ -17,13 +19,24 @@ class GpsProperties(latitude:Double,longitude: Double,countryName:String){
     }
 
 }
-class GpsDelegate {
+class GpsDelegate private constructor(){
+    companion object {
+        private var instance: GpsDelegate? = null
+        fun getInstance(): GpsDelegate? {
+            if (instance == null) {
+                instance = GpsDelegate()
+            }
+            return instance
+        }
+    }
     var gpsProperties: GpsProperties by observable() { property, oldValue, newValue ->
 
     }
 
     private fun observable(onChange: (property: KProperty<*>, oldValue: GpsProperties, newValue: GpsProperties) -> Unit) {
         RestClient.getWeatherData(gpsProperties.latitude,gpsProperties.longitude)
+        Log.d("gpslongitude",gpsProperties.longitude.toString())
+        Log.d("gpslatitude",gpsProperties.latitude.toString())
     }
 
 }
